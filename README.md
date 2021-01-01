@@ -2,7 +2,7 @@
 
 此仓库存储我的在学习李宏毅老师的The Next Step for Machine Learning课程时的笔记，持续更新中...  
 
-
+  
 
 ### **如果笔记对你有帮助就最好了。** 😘  
 
@@ -36,13 +36,15 @@ note-md目录中存储的是markdown源码，静态资源也存储在该目录�
 
 上述内容发布在我的个人博客，如果你觉得我的博客页太丑了影响你阅读，可以使用pdf版本或者下载markdown源码使用自己的阅读器阅读。
 
+如果你在学习李宏毅老师的机器学习基础课程：[Machine Learning (Hung-yi Lee, NTU)](https://youtube.com/playlist?list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49)，你可以参考[Sakura-gh/ML-notes](https://github.com/Sakura-gh/ML-notes)，笔记详实，让我受益匪浅。
 
+  
 
 ### LICENSE：
 
 GNU General Public License v3.0
 
-
+  
 
 ### 最后
 
