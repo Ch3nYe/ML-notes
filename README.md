@@ -1,9 +1,10 @@
 # ML-notes
- Notes for HungYi Lee - The Next Step for Machine Learning
 
-此仓库存储我的在学习李宏毅老师的The Next Step for Machine Learning课程时的笔记，持续更新中...
+此仓库存储我的在学习李宏毅老师的The Next Step for Machine Learning课程时的笔记，持续更新中...  
 
-**如果笔记对你有帮助就最好了。**😘
+
+
+### **如果笔记对你有帮助就最好了。** 😘  
 
 note-md目录中存储的是markdown源码，静态资源也存储在该目录下的images子目录中，note-pdf目录中存储导出的pdf格式的笔记，有需要的朋友可以自取。
 
@@ -37,15 +38,21 @@ note-md目录中存储的是markdown源码，静态资源也存储在该目录�
 
 
 
-##### LICENSE：
+### LICENSE：
+
+GNU General Public License v3.0
 
 
 
+### 最后
 
+如果你在文中发现任何字词错误、语法错误、表述不清、表达错误，可以采取以下措施：
 
+- 提交Issue，我会修正
+- fork 本项目修改错误，然后提交PR
+- 给我发邮件，骂我，我会修正：sud0su@qq.com
 
-
-
+- 给我的blog留言，骂我，我会修正
 
 
 
