@@ -32,6 +32,7 @@ note-md目录中存储的是markdown源码，静态资源也存储在该目录�
 
 [GAN (Quick Review)](https://ch3nye.top/GAN(Quick-Review)/)
 
+[Flow-based Generative Model](https://ch3nye.top/Flow-based-Generative-Model/)
 
 
 上述内容发布在我的个人博客，如果你觉得我的博客页太丑了影响你阅读，可以使用pdf版本或者下载markdown源码使用自己的阅读器阅读。
