@@ -1,5 +1,12 @@
 ---
 title: GAN(Quick Review)
+date: 2020-12-31
+tags:
+	- ML
+	- note
+	- Next-Step-of-ML
+categories:
+  - 李宏毅机器学习笔记
 ---
 
 # GAN(Quick Review)
