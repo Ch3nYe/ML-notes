@@ -1,6 +1,6 @@
 # ML-notes
 
-此仓库存储我的在学习李宏毅老师的The Next Step for Machine Learning课程时的笔记，持续更新中...  
+此仓库存储我的在学习李宏毅老师的[The Next Step for Machine Learning](https://youtube.com/playlist?list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49)课程时的笔记，持续更新中...  
 
   
 
