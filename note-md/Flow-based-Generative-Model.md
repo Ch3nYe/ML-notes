@@ -13,7 +13,7 @@ categories:
 
 本节要讲一个新的生成模型，一个新的Generative 技术，它和GAN的目的相同，但是不如GAN有名，而且实际上也没有胜过GAN，但是这个方法有比较新颖的思想所以还是讲一讲。这个方法叫做Flow-based Generative Model，这里的Flow就是流的意思，后面会解释为什么说它是流。
 
-![image-20210107220703923](images/image-20210107220703923.png)
+![image-20210107220703923](/images/image-20210107220703923.png)
 
 >Link: https://youtu.be/YNUek8ioAJk
 >
@@ -25,7 +25,7 @@ categories:
 
 ## 过去的Generative Models 的缺点
 
-![image-20210107221739321](images/image-20210107221739321.png)
+![image-20210107221739321](/images/image-20210107221739321.png)
 
 我们之前介绍的生成模型都有各自的问题，如上图所示。
 
@@ -37,11 +37,11 @@ Generative Adversarial Network 是现在做生成得到的目标质量最好的�
 
 ## Generator 的内涵
 
-![image-20210107223319433](images/image-20210107223319433.png)
+![image-20210107223319433](/images/image-20210107223319433.png)
 
 我们抛开具体模型，先来看看Generator 的定义。Generator 是一个网络，该网络定义了一个可能性分布$p_G$ 。怎么理解这句话呢，看上图，有一个Generator $G$ 输入一个 $z$ 输出一个 $x$ ，如果现在是在做人脸生成，  $x$ 是一张人脸图片，可以看成一个高维向量其中每一个element 就是图片的一个pixel， $z$ 我们通常假设它是从一个简单的空间中sample 出来的，比如说Normal Distribution，虽然 $z$ 是从一个简单的分布中sample 出来的，但是通过 $G$ 以后 $x$ 可能会形成一个非常复杂的分布，这个Distribution 我们用 $P_G$ 来表示。对我们而言我们会希望通过 $G$ 得到的Distribution 能和real data 也就是真实人脸数据集的Distribution $P_data$ 尽可能相同。
 
-那怎么能让 $P_G$ 和 $P_data$ 尽可能相同呢，常见的做法是我们训练G的时候训练目标定为maximize likelihood ，讲的具体一点就是从人脸图片数据集中sample 出m笔data $\{x^1,x^2,...,x^m\}$ ，然后你就是希望这m张图片是从 $P_G$ 这个分布中sample 出来的概率越大越好。就是maximize 上图中左下角的公式，这就是我们熟知的maximize likelihood。如果你难以理解为什么要让产生这些data 的概率越大越好的话，老师提供了一个更直观的解释：maximize likelihood 等同于minimize  $P_G$ 和 $P_data$ 的*K-L*变换。Ref: https://youtu.be/DMA4MrNieWo
+那怎么能让 $P_G$ 和 $P_data$ 尽可能相同呢，常见的做法是我们训练G的时候训练目标定为maximize likelihood ，讲的具体一点就是从人脸图片数据集中sample 出m笔data $\lbrace x^1,x^2,...,x^m\rbrace $ ，然后你就是希望这m张图片是从 $P_G$ 这个分布中sample 出来的概率越大越好。就是maximize 上图中左下角的公式，这就是我们熟知的maximize likelihood。如果你难以理解为什么要让产生这些data 的概率越大越好的话，老师提供了一个更直观的解释：maximize likelihood 等同于minimize  $P_G$ 和 $P_data$ 的*K-L*变换。Ref: https://youtu.be/DMA4MrNieWo
 
 总而言之就是让 $P_G$ 和 $P_data$ 这两个分布尽可能相同。
 
@@ -51,7 +51,7 @@ Flow 这个模型有什么厉害的地方呢？Generator 是个一个网络，�
 
 ==**math warning**==
 
-![image-20210107225517666](images/image-20210107225517666.png)
+![image-20210107225517666](/images/image-20210107225517666.png)
 
 这可能也是Flow-based Generative Model 不太出名的一个原因，其他生成模型都比较容易理解，而此模型用到了比较多的数学知识。你要知道上图中的三个概念：Jacobian、Determinant、Change of Variable Theorem 。
 
@@ -59,7 +59,7 @@ Flow 这个模型有什么厉害的地方呢？Generator 是个一个网络，�
 
 ### Jacobian Matrix
 
-![image-20210108084823462](images/image-20210108084823462.png)
+![image-20210108084823462](/images/image-20210108084823462.png)
 
 把 $f$ 看作生成模型，$z$ 就是输入，$x$ 就是生成的输出。这里我们的栗子中输入输出的维度是相同的，实际做的时候往往是不同的。Jacobian Matrix 记为 $J_f$ ，就定义为输出和输入向量中element 两两组合做偏微分组成的矩阵，如上图左下角所示，输出作为列，输入作为行， $J_f$ 每个element 都是输出对输入做偏微分。 $J_{f^{-1}}$ 的定义同上只是变成了输入对输出的偏微分。
 
@@ -69,11 +69,11 @@ Flow 这个模型有什么厉害的地方呢？Generator 是个一个网络，�
 
 ### Determinant
 
-![image-20210108090320317](images/image-20210108090320317.png)
+![image-20210108090320317](/images/image-20210108090320317.png)
 
 Determinant ：方阵的行列式是一个标量，它提供有关方阵的信息。你只要记得上图左下角行列式的性质，矩阵的det和矩阵逆的det互为倒数。
 
-![image-20210108091422967](images/image-20210108091422967.png)
+![image-20210108091422967](/images/image-20210108091422967.png)
 
 矩阵的行列式的绝对值可以表示行列式每一行表示的向量围成的空间的"面积"（3维空间中是体积，更高维空间中也是类似的概念）。或者你可以想象它是矩阵所表示的线性变换前后的“面积”放缩比例。
 
@@ -85,7 +85,7 @@ Determinant ：方阵的行列式是一个标量，它提供有关方阵的信�
 
 Determinant 就是为了解释Change of Variable Theorem
 
-![image-20210108094142062](images/image-20210108094142062.png)
+![image-20210108094142062](/images/image-20210108094142062.png)
 
 假设我们有一个分布 $\pi(z)$ ，$z$ 带入 $f$ 会得到 $x$ ， $x$ 形成了分布 $p(x)$ ，我们现在想知道 $\pi(z)$ 和  $p(x)$ 之间的关系。如果我们可以写出两者之间的关系，就可以分析一个Generator 。
 
@@ -93,13 +93,13 @@ Determinant 就是为了解释Change of Variable Theorem
 
 举一个简单的栗子来说明上述问题：
 
-![image-20210108095707759](images/image-20210108095707759.png)
+![image-20210108095707759](/images/image-20210108095707759.png)
 
 假设说两个分布如上图所示，我们知道probability density function 的积分等于1，所以两者的高度分别为1和$\frac{1}{2}$，假设 $x$ 和 $z$ 的关系是 $x=2z+1$ ，底就变成原来的两倍，高度就变成原来的二分之一。现在从 $\pi(z')$ 到 $p(x')$ 中间的关系很直觉就是二分之一的关系。
 
 那我们再来看一个更general 的case：
 
-![image-20210108100623356](images/image-20210108100623356.png)
+![image-20210108100623356](/images/image-20210108100623356.png)
 
 两个分布如上图浅蓝色和浅绿色线所示，现在我们不知道这两者的Distribution，假设我们知道 $x$ 和 $z$ 的关系即知道 $f$ ，那我们就可以求出 $\pi(z')$ 和 $p(x')$ 之间的关系，这就是Change of Variable Theorem 的概念。
 
@@ -111,7 +111,7 @@ $$
 
 我们在举一个 $x$ 和 $z$ 都是二维的栗子：
 
-![image-20210108102744905](images/image-20210108102744905.png)
+![image-20210108102744905](/images/image-20210108102744905.png)
 
 我们在 $z$ 的分布中取一个小小的矩形区域高是 $Δz_2$ 宽是 $Δz_1$ ，它通过一个function $f$ 投影到 $x$ 的分布中变成一个菱形。我们用向量 $[Δx_{11}, Δx_{21}]$ 表示菱形的右下边，用向量$[Δx_{22}, Δx_{12}]$ 表示菱形的左上边。根据上面Determinant 一节中提到的知识点，我们可以用这两个向量组成的矩阵的determinant 表示该矩阵的面积。$\pi(z')$ 作为正方形为底的三维形体的高， $p(x')$ 作为以绿色菱形为底的三维形体的高，这两个形体的积分值相等，所以得到了如上图所示的公式。
 
@@ -129,7 +129,7 @@ $Δx_{22}$是$z_2$改变的时候$x_2$的变化量
 
 ### 整理公式得出结论
 
-![image-20210108105016496](images/image-20210108105016496.png)
+![image-20210108105016496](/images/image-20210108105016496.png)
 
 接下来就是做一波整理，相信大家都看得懂（看不懂就重学一下线代😜），就不赘述了。
 
@@ -147,7 +147,7 @@ $Δx_{22}$是$z_2$改变的时候$x_2$的变化量
 
 接下来我们就正式进入Flow的部分，我们先回到Generation 上。
 
-![image-20210108105914924](images/image-20210108105914924.png)
+![image-20210108105914924](/images/image-20210108105914924.png)
 
 一个Generator 是怎么训练出来的呢，Generator 训练的目标就是要maximize $P_G(x^i)$ ，$x^i$ 是从real data 中sample 出来的一笔data。那 $P_G(x^i)$ 长什么样子呢，有了前面的Change of Variable Theorem 的公式我们就可以把 $P_G(x^i)$ 写出来了：
 $$
@@ -168,7 +168,7 @@ $$
 
 
 
-![image-20210108114834015](images/image-20210108114834015.png)
+![image-20210108114834015](/images/image-20210108114834015.png)
 
 既然一个G不够强，你就多加一些。最终maximize的目标就是上图最下面的公式。
 $$
@@ -178,7 +178,7 @@ $$
 
 ## 实作上怎么做Flow-based Model
 
-![image-20210108120249280](images/image-20210108120249280.png)
+![image-20210108120249280](/images/image-20210108120249280.png)
 
 我们先考虑一个G，在公式中其实只有出现 $G^{-1}$ ，所以实际上我们在训练的时候我们训练的是 $G^{-1}$ ，在生成的时候把 $G^{-1}$ 倒过来用 $G$ 生成目标。在训练的时候，从real data 中sample 一些数据出来，输入 $G^{-1}$ 中得到 $z^i$ 。
 
@@ -194,7 +194,7 @@ $$
 
 coupling layer 是一个实用的G，NICE 和Real NVP 这两个Flow-based Model 都用到了coupling layer ，接下来将介绍这个coupling layer 的具体做法。
 
-![image-20210108131157708](images/image-20210108131157708.png)
+![image-20210108131157708](/images/image-20210108131157708.png)
 
 > NICE 
 >
@@ -208,11 +208,11 @@ coupling layer 是一个实用的G，NICE 和Real NVP 这两个Flow-based Model 
 
 接下来要讲怎么取coupling layer 的inverse。就是说在不知道z，只有后面的x，这样的情况下怎么把z找出来呢？
 
-![image-20210108132257510](images/image-20210108132257510.png)
+![image-20210108132257510](/images/image-20210108132257510.png)
 
 对于第一部分直接把x copy过去就可以了，对于第二部分，我们就把刚才得到的z的第一部分通过F和H得到β和γ，然后将x的第二部分通过 $\frac{x_i-γ_i}{β_i}$ 就可以算出z ，结束。
 
-![image-20210108132754676](images/image-20210108132754676.png)
+![image-20210108132754676](/images/image-20210108132754676.png)
 
 不只要能算G的inverse，还要算 $J_G$ ，计算方法就如上图所示。
 
@@ -233,13 +233,13 @@ $$
 
 ### stacking
 
-![image-20210108134450027](images/image-20210108134450027.png)
+![image-20210108134450027](/images/image-20210108134450027.png)
 
 如果你是简单的把coupling layer 叠在一起，那你会发现最后生成的东西有一部分是noise，因为上面是这部分向量是直接一路copy到输出的。
 
 所以我们做一些手脚，把其中一些coupling layer 做一下反转，如上图下侧所示。
 
-![image-20210108134823916](images/image-20210108134823916.png)
+![image-20210108134823916](/images/image-20210108134823916.png)
 
 我们再讲的更具体一点，如果说我们在做图像生成，有两种拆分向量的做法：一种是把横轴纵轴切分成多条，横轴纵轴的index之和是奇数就copy偶数就不copy做transform 。或者是，一张image 通常由rgb三个channel，你就其中某几个channel 做copy 某几个channel 做transform，每次copy 和transform 的channel 可能是不一样，你有很多层coupling layer 嘛。当然，你也可以把这两种做法混在一起用，有时用第一种拆分方法，有时候用第二种拆分方法。
 
@@ -247,7 +247,7 @@ $$
 
 ## 1x1 Convolution
 
-![image-20210108135331466](images/image-20210108135331466.png)
+![image-20210108135331466](/images/image-20210108135331466.png)
 
 > GLOW 
 >
@@ -259,11 +259,11 @@ GLOW除了Coupling Layer，还有个神奇的layer 叫做1x1 Convolution，举�
 
 如果W是invertible ，那就很容易算出 $W^{-1}$ ，但是W是learn 出来的，这样的话它一定是invertible 的吗，文献中作者在initial 的时候就用了一个invertible matrix，他也许是期待initial invertible matrix，最后的结果也能是invertible matrix。但是实际上invertible matrix 是比较容易出现的，你随机设置一个matrix 大概率就是invertible ，你想想看只有det是0才是非invertible，所以实作上也没太大问题，老师讲如果你看到有文献解释或者考虑这件事情了记得call他，也记得call我，方便我在这里做一些补充。
 
-![image-20210108142040039](images/image-20210108142040039.png)
+![image-20210108142040039](/images/image-20210108142040039.png)
 
 我们来举一个栗子，如上图所示，我们把一个像素 $[x_1,x_2,x_3]$ 乘上W，做一个 转换，求这个W的Jacobian Matrix 的公式如上图所示，你自己细算一下就会发现，$J_f$ 就是W。
 
-![image-20210108142334685](images/image-20210108142334685.png)
+![image-20210108142334685](/images/image-20210108142334685.png)
 
 所以现在全部的z和x，做变换使用的Generator （也就是很dxd个W）的Jacobian Matrix 就是上图所示的对角矩阵，因为只有对角线上的元素对应的蓝色pixel 和绿色pixel 才是有关系的，其它地方的偏微分都是0。
 
@@ -279,11 +279,11 @@ Flow-based Model 有一个很知名的结果就是GLOW这个Model，OpenAI有做
 
 你可以做人脸的结合：
 
-![image-20210108143219612](images/image-20210108143219612.png)
+![image-20210108143219612](/images/image-20210108143219612.png)
 
 可以把脸做种种变形，比如说让人笑起来：
 
-![image-20210108143324096](images/image-20210108143324096.png)
+![image-20210108143324096](/images/image-20210108143324096.png)
 
 你需要先收集一堆笑的人脸、一堆不笑的人脸，把这两个集合的图片的z求出来分别取平均，然后相减的到 $z_{smile}$ ，$z_{smile}$ 就是从不笑到笑移动多少距离。然后，你只要往不笑的脸上加上一个 $z_{smile}$ 通过G，就可以得到笑的脸了。
 
@@ -291,6 +291,6 @@ Flow-based Model 有一个很知名的结果就是GLOW这个Model，OpenAI有做
 
 ## To Learn More ...
 
-![image-20210108143742320](images/image-20210108143742320.png)
+![image-20210108143742320](/images/image-20210108143742320.png)
 
 GLOW 现在做的最多的就是语音合成。在语音合成任务上，不知道为什么用GAN做的结果都不是很好，Auto-regressive Model 就是一个一个sample 产生出来，结果是很好，但是计算太慢不太实用，所以现在都在用GLOW ，就留给大家自学了。
