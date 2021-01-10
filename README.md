@@ -1,6 +1,6 @@
 # ML-notes
 
-此仓库存储我的在学习李宏毅老师的[The Next Step for Machine Learning](https://youtube.com/playlist?list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49)课程时的笔记，持续更新中...  
+此仓库存储我的在学习李宏毅老师的[The Next Step for Machine Learning](https://youtube.com/playlist?list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49)课程时的笔记，flag:最后一节一周之内必更完  
 
   
 
@@ -34,6 +34,7 @@ note-md目录中存储的是markdown源码，静态资源也存储在该目录�
 
 [Flow-based Generative Model](https://ch3nye.top/Flow-based-Generative-Model/)
 
+[Transformer](https://ch3nye.top/Transformer/)
 
 上述内容发布在我的个人博客，如果你觉得我的博客页太丑了或渲染出问题影响你阅读，可以使用pdf版本或者下载markdown源码使用自己的阅读器阅读。
 
