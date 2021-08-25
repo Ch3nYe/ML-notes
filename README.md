@@ -40,6 +40,8 @@ note-md目录中存储的是markdown源码，静态资源也存储在该目录�
 
 [ELMO, BERT, GPT](https://ch3nye.top/ELMO-BERT-GPT/)
 
+[Graph-Neural-Network](https://ch3nye.top/Graph-Neural-Network/)
+
 上述内容发布在我的个人博客，如果你觉得我的博客页太丑了或渲染出问题影响你阅读，可以使用pdf版本或者下载markdown源码使用自己的阅读器阅读。
 
 如果你在学习李宏毅老师的机器学习基础课程：[Machine Learning (Hung-yi Lee, NTU)](https://youtube.com/playlist?list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49)，你可以参考[Sakura-gh/ML-notes](https://github.com/Sakura-gh/ML-notes)，笔记详实，让我受益匪浅。
