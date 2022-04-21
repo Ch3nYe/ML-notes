@@ -94,7 +94,7 @@ TSP 路径规划问题，就不用赘述了.
 
 ## Spatial-based GNN
 
-复习以下CNN的Convolution：
+复习一下CNN的Convolution：
 
 ![image-20210825135159937](images/image-20210825135159937.png)
 
@@ -128,13 +128,13 @@ NN4G这个模型Readout的做法如上图所示，无需多言.
 
 这个模型的Aggregation的做法是：每一层都从第一层计算得来，算是这样算的：
 $$
-h_0^3 = w_3^0 MEAN(d(3, \cdot )=1)
+h_3^0= w_3^0 MEAN(d(3, \cdot )=1)
 $$
-这是说和$v_3$距离为1的节点取平均，乘上一个权重矩阵$w_3^0$. 即节点v0 v2 v4
+这是说和$v_3$距离为1的节点取平均，乘上一个权重矩阵$w_3^0$，即节点v0 v2 v4。算完每个节点以后得到第一层的h。
 $$
-h_1^3 = w_3^1 MEAN(d(3, \cdot )=2)
+h_3^1 = w_3^1 MEAN(d(3, \cdot )=2)
 $$
-这是说和$v_3$距离为2的节点取平均，乘上一个权重矩阵$w_3^1$. 即节点v1 v3
+这是说和$v_3$距离为2的节点取平均，乘上一个权重矩阵$w_3^1$，即节点v1 v3。算完每个节点以后得到第二层的h。
 
 ![image-20210825141820745](images/image-20210825141820745.png)
 
@@ -150,11 +150,11 @@ readout的做法如上图所示，无需多言.
 
 ![image-20210825142018057](images/image-20210825142018057.png)
 
-> ref:arrow_lower_left::arrow_lower_left:https://arxiv.org/pdf/1611.08402.pdf
+> ref: https://arxiv.org/pdf/1611.08402.pdf
 
 MoNET 对图中的边定义了距离权重，这篇文章中距离是由公式定义的，是可以直接计算的，也有的模型（GAT ）是通过graph data学出的.
 
-MoNET 将weighted sum neighbor features取代了简单的相加.
+MoNET 将weighted sum neighbor features取代了NN4G和DCNN简单的相加求平均.
 
 
 
@@ -166,6 +166,8 @@ MoNET 将weighted sum neighbor features取代了简单的相加.
 
 ![image-20210825143142451](images/image-20210825143142451.png)
 
+GAT计算节点在下一层上的hidden representation的时候，先算一个节点对它所有邻接节点的energy（即可变的weight） ，然后把这个energy作为权重乘上节点在当前层上的hidden representation，再求和（如上图所示），作为最终的在下一层的表示. 
+
 
 
 ### GIN (Graph Isomorphism Network)
@@ -174,10 +176,10 @@ MoNET 将weighted sum neighbor features取代了简单的相加.
 
 > ref: https://openreview.net/forum%3Fid=ryGs6iA5Km
 
-- A GNN can be at most as powerful as WL isomorphic test
-- Theoretical proofs were provided
+- A GNN can be at most as powerful as WL isomorphic test 
+- Theoretical proofs were provided 
 
-**结论**：
+**结论**：更新节点 representation 的时候最好使用下图中的公式所示的方式更新. 
 
 ![image-20210825143355820](images/image-20210825143355820.png)
 
@@ -185,7 +187,7 @@ MoNET 将weighted sum neighbor features取代了简单的相加.
 $$
 h_v^{(k)} = MLP^{(k)} ((1 + \epsilon^{(k)} )\cdot h_v^{(k-1)} + \sum_{u \in N(v)} h_v^{(k-1)})
 $$
-k是layer，v是node id，h update的方式应该要先将neighbor 全都加起来，而不能用max pooling也不能用mean pooling，然后加上某个constant 乘以 自己的feature，这个constant就是 $1 + \epsilon^{(k)} $ 这里的 $\epsilon$ 是可以学出来的但是paper中也说了这里设为0也没太大差别.
+k是layer，v是node id，h update的方式应该要先将neighbor 全都加起来，而不能用max pooling也不能用mean pooling，然后加上某个constant 乘以 自己的feature，这个constant就是 $1 + \epsilon^{(k)} $ 这里的 $\epsilon$ 是可以学出来的，但是paper中也说了这里设为0也没太大差别.
 
 为什么不能用max pooling也不能用mean pooling，看上图下面一排：
 
@@ -207,9 +209,9 @@ MLP是multi layer perceptron
 
 ![image-20210825162358429](images/image-20210825162358429.png)
 
-Spectral-based GNN 要做的事情就是将graph 和kernel 都转换到傅里叶域中，在傅里叶域中做multiplication，再转换回去，就是得到下一个layer.
+Spectral-based GNN 要做的事情就是将graph 和convolution kernel 都转换到傅里叶域中，在傅里叶域中做multiplication，再转换回去，就是得到下一个layer.
 
-问题是这个傅里叶变换要怎么做呢，要回答这个问题要引入很多信号与系统的东西
+问题是这个傅里叶变换要怎么做呢，要回答这个问题要引入很多信号与系统的东西. 
 
 
 
@@ -217,7 +219,7 @@ Spectral-based GNN 要做的事情就是将graph 和kernel 都转换到傅里叶
 
 没学过信号与系统，听不懂，但不影响对整个GNN的理解（大概
 
-如果想很好的理解下面讲的Spectral-based GNN的话，建议还是好好理解一下Warning of  Signal And System这一部分.
+如果想很好的理解下面讲的Spectral-based GNN的话，建议还是好好理解一下 Warning of  Signal And System 这一部分.
 
 
 
